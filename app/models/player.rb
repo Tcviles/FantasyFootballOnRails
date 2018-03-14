@@ -3,7 +3,5 @@ class Player < ApplicationRecord
   has_many :teams, through: :team_players
   belongs_to :position
 
-  def ppg
-    self.avg_fantasy_ppg
-  end
+  validates_presence_of :name, :nfl_team, :adp, :avg_fantasy_ppg, :position_id
 end
