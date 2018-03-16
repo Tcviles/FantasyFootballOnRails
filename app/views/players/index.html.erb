@@ -1,26 +1,37 @@
-<table>
-  <thead>
-    <tr>
-      <th>Ranking</th>
-      <th>Name</th>
-      <th>Position</th>
-      <th>NFL Team</th>
-      <th>ADP</th>
-      <th>FP/G</th>
-      <th>Link</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @players.each_with_index do |player, index| %>
-      <tr>
-        <td><%=index+1%></td>
-        <td><%=player.name%></td>
-        <td><%=player.position.name%></td>
-        <td><%=player.nfl_team%></td>
-        <td><%=player.adp%></td>
-        <td><%=player.ppg%></td>
-        <td><%=link_to "Add Me", player_path(player)%></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= link_to "Update Players", players_sync_path %><br><br>
+
+<%@positions.each do |position|%>
+  <div class="shorten">
+    <table id="player">
+      <thead>
+        <tr>
+          <label class="title"><%=position.name%></label>
+        </tr>
+        <tr>
+          <th>Ranking</th>
+          <th>Name</th>
+          <th>Position</th>
+          <th>NFL Team</th>
+          <th>ADP</th>
+          <th>Link</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% position.players.order(:adp).each_with_index do |player, index| %>
+          <tr>
+            <% if index<=9%>
+              <td style="text-align:center; color:white; background-color:green;"><%=index+1%></td>
+            <%else%>
+              <td style="text-align:center;"><%=index+1%></td>
+            <%end%>
+            <td><%=player.name%></td>
+            <td><%=player.position.name%></td>
+            <td><%=player.nfl_team%></td>
+            <td><%=player.adp%></td>
+            <td><%=link_to "See Me", player_path(player)%></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<%end%>
