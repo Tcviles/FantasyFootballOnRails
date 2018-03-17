@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+  authenticated :user do
+    root 'welcome#home', as: 'authenticated_root'
+  end
+  devise_scope :user do
+    root 'devise/sessions#new'
+  end
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+
+  get '/auth/facebook/callback' => 'sessions#create'
 
   get 'players/sync', to: 'players#sync'
   resources :players, only: [:index, :show, :sync]
@@ -6,6 +15,8 @@ Rails.application.routes.draw do
   resources :leagues
   resources :teams
   resources :positions
+
+  root "welcome#home"
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

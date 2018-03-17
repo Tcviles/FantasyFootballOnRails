@@ -24,4 +24,12 @@ class Player < ApplicationRecord
       baller.save
     end
   end
+
+  def position_rank
+    (self.class.all.where(position:self.position).order(:adp).find_index(self).to_i+1).ordinalize
+  end
+
+  def player_rank
+    (self.class.all.order(:adp).find_index(self).to_i+1).ordinalize
+  end
 end

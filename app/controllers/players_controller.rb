@@ -11,7 +11,5 @@ class PlayersController < ApplicationController
 
   def show
     @player = Player.find(params[:id])
-    @position_rank = (Player.all.where(position:@player.position).order(:adp).find_index(@player).to_i+1).ordinalize
-    @player_rank = (Player.all.order(:adp).find_index(@player).to_i+1).ordinalize
   end
 end

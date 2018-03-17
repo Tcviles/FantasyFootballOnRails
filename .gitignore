@@ -18,6 +18,8 @@
 !/log/.keep
 !/tmp/.keep
 
+.env
+
 /node_modules
 /yarn-error.log
 
@@ -67,3 +69,6 @@ bower.json
 # Ignore Byebug command history file.
 >>>>>>> 5ed020a6a379a10a4a08adbf00288de8a17d9863
 .byebug_history
+
+# Ignore application configuration
+/config/application.yml
