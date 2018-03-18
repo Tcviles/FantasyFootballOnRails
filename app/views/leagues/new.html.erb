@@ -1,0 +1,28 @@
+<label class="title">New League!</label><br><br>
+<%= form_for @league do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %><br><br>
+
+  <label class="title">First Team</label><br><br>
+  <%= f.fields_for :new_team do |team| %>
+    <%= team.label :team_name %>
+    <%= team.text_field :team_name %><br>
+
+    <%= team.label :quarter_back %>
+    <%= team.collection_select(:qb, @qb, :id, :name)%><br>
+
+    <%= team.label :runnning_back %>
+    <%= team.collection_select(:rb, @rb, :id, :name)%><br>
+
+    <%= team.label :wide_reciever %>
+    <%= team.collection_select(:wr, @wr, :id, :name)%><br>
+
+    <%= team.label :flex %>
+    <%= team.collection_select(:flex, @flex, :id, :name)%><br>
+
+    <%= team.label :tight_end %>
+    <%= team.collection_select(:te, @te, :id, :name)%><br>
+  <% end %>
+
+  <%= f.submit %>
+<% end %>

@@ -1,14 +1,28 @@
-Welcome <%=current_user.email%>! <br><br>
-Here are your Leagues
-<ul>
-  <%@current_leagues.each do |league|%>
-  <li><%= link_to league.name, league_path(league.id)%></li>
-  <%end%>
-</ul>
+<label class="title"> Welcome <%=current_user.email%>! </label><br><br>
+<table style="float:left;">
+  <thead>
+    <th>Here are your Leagues</th>
+  </thead>
+  <tbody>
+    <%@current_leagues.each do |league|%>
+      <tr>
+        <td><%= link_to league.name, league_path(league.id)%></td>
+      </tr>
+    <%end%>
+  </tbody>
+</table>
 
-Leagues you can join!
-<ul>
-  <%@available_leagues.each do |league|%>
-  <li><%= link_to league.name, league_path(league.id)%></li>
-  <%end%>
-</ul>
+<table style "float:right;">
+  <thead>
+    <th>Leagues you can join!!</th>
+  </thead>
+  <tbody>
+    <%@available_leagues.each do |league|%>
+      <tr>
+        <td><%= link_to league.name, league_path(league.id)%></td>
+      </tr>
+    <%end%>
+  </tbody>
+</table>
+
+<%= link_to "Create a new league!", new_league_path, {:class=>"button", :style =>'float:right;'} %>
