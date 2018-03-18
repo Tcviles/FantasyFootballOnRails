@@ -1,0 +1,23 @@
+<label class=title><%=@league.name%></label><br><br>
+<table>
+  <thead>
+    <th>User</th>
+    <th>Team Name</th>
+    <th>Winner</th>
+  </thead>
+  <tbody>
+    <% @league.users.each do |user|%>
+    <tr>
+      <td><%=user.email%></td>
+      <td><%=link_to user.league_team(@league).name, user.league_team(@league)%></td>
+      <td><%= 'X' if user.league_team(@league) == @league.current_winner%></td>
+    </tr>
+    <%end%>
+  </tbody>
+</table>
+
+
+
+<%if !@league.users.include?(current_user)%>
+  <%=link_to "Create a roster for league", new_league_team_path(@league)%>
+<%end%>

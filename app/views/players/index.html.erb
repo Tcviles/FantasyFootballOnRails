@@ -1,7 +1,7 @@
-<%= link_to "Update Players", players_sync_path %><br><br>
+<br><%= link_to "Update Players", players_sync_path, {:class => "button"}%><br><br>
 
 <%@positions.each do |position|%>
-  <div class="shorten">
+  <div class="shorten player">
     <table id="player">
       <thead>
         <tr>

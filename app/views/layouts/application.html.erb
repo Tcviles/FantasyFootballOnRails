@@ -8,17 +8,25 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <% if user_signed_in? %>
-      <%= link_to "Edit profile", edit_user_registration_path %> |
-      <%= link_to "Logout", destroy_user_session_path, method: :delete  %>
-    <% else %>
-      <%= link_to "Sign up", new_user_registration_path  %> |
-      <%= link_to "Login", new_user_session_path  %>
-    <% end %>
-    <%= content_tag(:div, flash[:error], :id => "flash_error") if flash[:error] %>
-    <%= content_tag(:div, flash[:notice], :id => "flash_notice") if flash[:notice] %>
-    <%= content_tag(:div, flash[:alert], :id => "flash_alert") if flash[:alert] %>
-    <%= yield %>
+  <body class="wrapper">
+    <nav class="navbar">
+      <ul>
+        <% if user_signed_in? %>
+          <li><%= link_to "Home", root_path%></li>
+          <li><%= link_to "Edit profile", edit_user_registration_path %></li>
+          <li><%= link_to "See Players", players_path%></li>
+          <li><%= link_to "Logout", destroy_user_session_path, method: :delete  %></li>
+        <% else %>
+          <li><%= link_to "Sign up", new_user_registration_path  %></li> |
+          <li><%= link_to "Login", new_user_session_path  %></li>
+        <% end %>
+          <%= content_tag(:li, flash[:error], :id => "flash_error") if flash[:error] %>
+          <%= content_tag(:li, flash[:notice], :id => "flash_notice") if flash[:notice] %>
+          <%= content_tag(:li, flash[:alert], :id => "flash_alert") if flash[:alert] %>
+      </ul>
+    </nav><br><br>
+    <div class="app clearfix">
+      <%= yield %>
+    </div>
   </body>
 </html>

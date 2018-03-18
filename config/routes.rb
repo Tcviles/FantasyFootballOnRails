@@ -12,7 +12,9 @@ Rails.application.routes.draw do
   get 'players/sync', to: 'players#sync'
   resources :players, only: [:index, :show, :sync]
 
-  resources :leagues
+  resources :leagues do
+    resources :teams
+  end
   resources :teams
   resources :positions
 

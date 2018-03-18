@@ -1,12 +1,32 @@
 table, th, td {
+  border: 2px solid black;
+}
+
+body {
+  background-image:url(https://st.depositphotos.com/1019798/1961/i/950/depositphotos_19614185-stock-photo-green-grass-texture.jpg);
+  margin: 10px 50px;
+}
+
+div.app {
+  background: white;
   border: 1px solid black;
+}
+
+div.player {
+  background: green;
+  border: 1px solid black;
+}
+
+.wrapper {
+  width: 960px;
+  margin: 0 auto;
 }
 
 .shorten {
   max-height: 400px;
-  width: 32%;
+  width: 47%;
   overflow: auto;
-  margin: 10px;
+  margin: 10px 13px;
   float: left;
 }
 
@@ -35,7 +55,7 @@ table, th, td {
 
 #player {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-    width: 98%;
+    width: 100%;
 }
 
 #player td, #player th {
@@ -53,4 +73,62 @@ table, th, td {
     text-align: left;
     background-color: #4CAF50;
     color: white;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+nav li {
+    float: left;
+    border-right:1px solid #bbb;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+nav li:last-child {
+    border-right: none;
+}
+
+nav li a {
+  color: white;
+  text-decoration: none;
+}
+
+nav li a:hover:not(.active) {
+    background-color: #111;
+}
+
+nav.active {
+    background-color: #4CAF50;
+}
+
+.button {
+  padding: 3px 5px;
+  margin-left: 20px;
+  font-size: 20px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: green;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 4px #999;
+  text-decoration: none;
+}
+
+.button:hover {background-color: #3e8e41}
+
+.button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }

@@ -1,1 +1,14 @@
-Home!
+Welcome <%=current_user.email%>! <br><br>
+Here are your Leagues
+<ul>
+  <%@current_leagues.each do |league|%>
+  <li><%= link_to league.name, league_path(league.id)%></li>
+  <%end%>
+</ul>
+
+Leagues you can join!
+<ul>
+  <%@available_leagues.each do |league|%>
+  <li><%= link_to league.name, league_path(league.id)%></li>
+  <%end%>
+</ul>

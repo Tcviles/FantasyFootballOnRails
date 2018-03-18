@@ -1,8 +1,27 @@
-<%=form_for(@team) do |f|%>
-  <%= f.label :name%>
-  <%= f.text_field :name%>
-  <%= f.label :player%>
-  <%= binding.pry%>
-  <%= f.collection_select(:player_ids, Player.all, :id, :name) %>
+create a new team here
+
+<%= form_for @team do |f| %>
+  <%= f.hidden_field :league_id, :value => params[:league_id]%>
+
+  <%= f.label :name %>
+  <%= f.text_field :name %><br>
+
+  <%= f.fields_for :player_ids do |pos|%>
+    <%= pos.label :quarter_back%>
+    <%= pos.collection_select(:qb, @qb, :id, :name)%><br><br>
+
+    <%= pos.label :running_back%>
+    <%= pos.collection_select(:rb, @rb, :id, :name)%><br><br>
+
+    <%= pos.label :wide_reciever%>
+    <%= pos.collection_select(:wr, @wr, :id, :name)%><br><br>
+
+    <%= pos.label :flex%>
+    <%= pos.collection_select(:flex, @flex, :id, :name)%><br><br>
+
+    <%= pos.label :tight_end%>
+    <%= pos.collection_select(:te, @te, :id, :name)%><br><br>
+  <%end%>
+
   <%= f.submit %>
-<%end%>
+<% end %>
