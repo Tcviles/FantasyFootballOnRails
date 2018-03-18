@@ -4,7 +4,6 @@ class Player < ApplicationRecord
   has_many :team_players
   has_many :teams, through: :team_players
   belongs_to :position
-
   validates_presence_of :name, :nfl_team, :adp, :position_id
 
   def self.get_page

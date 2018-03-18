@@ -1,16 +1,30 @@
+<% if @league.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@league.errors.count, "error") %> prohibited this league from being saved:</h2>
+
+    <ul>
+    <% @league.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <label class=title><%=@league.name%></label><br><br>
 <table>
   <thead>
     <th>User</th>
     <th>Team Name</th>
-    <th>Winner</th>
+    <th>Mascot</th>
+    <th>Current Winner</th>
   </thead>
   <tbody>
-    <% @league.users.each do |user|%>
+    <% @league.teams.each do |team|%>
     <tr>
-      <td><%=user.email%></td>
-      <td><%=link_to user.league_team(@league).name, user.league_team(@league)%></td>
-      <td><%= 'X' if user.league_team(@league) == @league.current_winner%></td>
+      <td><%=team.user.email%></td>
+      <td><%=link_to team.name, league_team_path(@league, team)%></td>
+      <td><%=team.mascot.name if !!team.mascot%></td>
+      <td><%= 'X' if team == @league.current_winner%></td>
     </tr>
     <%end%>
   </tbody>
@@ -19,5 +33,6 @@
 
 
 <%if !@league.users.include?(current_user)%>
-  <%=link_to "Create a roster for league", new_league_team_path(@league)%>
 <%end%>
+<%=link_to "Create a roster for league", new_league_team_path(@league)%>
+<%= link_to 'Delete League', @league, method: :delete, data: { confirm: 'Are you sure??' } %>

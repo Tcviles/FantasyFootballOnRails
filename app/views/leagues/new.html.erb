@@ -4,25 +4,39 @@
   <%= f.text_field :name %><br><br>
 
   <label class="title">First Team</label><br><br>
-  <%= f.fields_for :new_team do |team| %>
-    <%= team.label :team_name %>
-    <%= team.text_field :team_name %><br>
+  <%= f.fields_for :new_team, @team do |team| %>
+    <%= team.label :name %>
+    <%= team.text_field :name %><br>
 
-    <%= team.label :quarter_back %>
-    <%= team.collection_select(:qb, @qb, :id, :name)%><br>
+    <%= team.fields_for :player_ids do |player_id|%>
+      <%= player_id.label :quarter_back %>
+      <%= player_id.collection_select(:qb, @qb, :id, :name)%><br>
 
-    <%= team.label :runnning_back %>
-    <%= team.collection_select(:rb, @rb, :id, :name)%><br>
+      <%= player_id.label :runnning_back %>
+      <%= player_id.collection_select(:rb, @rb, :id, :name)%><br>
 
-    <%= team.label :wide_reciever %>
-    <%= team.collection_select(:wr, @wr, :id, :name)%><br>
+      <%= player_id.label :wide_reciever %>
+      <%= player_id.collection_select(:wr, @wr, :id, :name)%><br>
 
-    <%= team.label :flex %>
-    <%= team.collection_select(:flex, @flex, :id, :name)%><br>
+      <%= player_id.label :flex %>
+      <%= player_id.collection_select(:flex, @flex, :id, :name)%><br>
 
-    <%= team.label :tight_end %>
-    <%= team.collection_select(:te, @te, :id, :name)%><br>
-  <% end %>
+      <%= player_id.label :tight_end %>
+      <%= player_id.collection_select(:te, @te, :id, :name)%><br>
+    <% end %><br><br>
+
+    <label class="title">Motto Info</label><br><br>
+    <%= team.fields_for :mascot_attributes, @team.mascot do |mascot| %>
+      <%= mascot.label :name%>
+      <%= mascot.text_field :name%><br>
+
+      <%= mascot.label :color%>
+      <%= mascot.text_field :color%><br>
+
+      <%= mascot.label :motto%>
+      <%= mascot.text_field :motto%><br>
+    <% end %>
+  <% end %><br><br>
 
   <%= f.submit %>
 <% end %>

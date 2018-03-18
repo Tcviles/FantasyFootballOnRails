@@ -3,6 +3,8 @@ class League < ApplicationRecord
   has_many :users, through: :teams
   has_many :league_players
   has_many :players, through: :league_players
+  validates :name, presence: true
+  validates :name, uniqueness: true
 
   def full
     self.users.size >10

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :mascots
   authenticated :user do
     root 'welcome#home', as: 'authenticated_root'
   end

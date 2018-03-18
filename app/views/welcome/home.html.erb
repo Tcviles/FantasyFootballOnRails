@@ -4,7 +4,7 @@
     <th>Here are your Leagues</th>
   </thead>
   <tbody>
-    <%@current_leagues.each do |league|%>
+    <%@current_leagues.uniq.each do |league|%>
       <tr>
         <td><%= link_to league.name, league_path(league.id)%></td>
       </tr>
