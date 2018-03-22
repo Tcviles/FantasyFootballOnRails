@@ -9,6 +9,6 @@ class ApplicationController < ActionController::Base
   end
 
   def set_positions
-    @positions = {:quarterback => :qb, :running_back=>:rb, wide_reciever: :wr, tight_end: :te, defense: :dst}
+    @positions = {quarterback: :qb, running_back: :rb, wide_reciever: :wr, tight_end: :te, defense: :dst}
   end
 end

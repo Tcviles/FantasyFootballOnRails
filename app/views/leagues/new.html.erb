@@ -3,7 +3,7 @@
   <div class="form-field">
     <%= form_for @league do |f| %>
     <%= f.label :name %>
-    <%= f.text_field :name, required: true%>
+    <%= f.text_field :name%>
     <br>
   </div>
   <h2 class="form-title">First Team</h2>
@@ -17,11 +17,11 @@
 
   <div class="form-field">
     <%= t.fields_for :player_ids do |player_id|%>
-    <% @positions.each do |pos_name, pos| %>
-    <% num= Position.find_by(:name => pos.to_s.upcase).id %>
-    <%= player_id.label pos_name %>
-    <%= player_id.collection_select(pos, Player.all.where(:position_id => num).order(:name), :id, :name, prompt: true)%><br>
-    <% end %>
+      <% @positions.each do |pos_name, pos| %>
+        <% num= Position.find_by(:name => pos.to_s.upcase).id %>
+        <%= player_id.label pos_name %>
+        <%= player_id.collection_select(pos, Player.all.where(:position_id => num).order(:name), :id, :name, prompt: true)%><br>
+      <% end %>
     <% end %>
   </div>
 
@@ -41,7 +41,11 @@
     <% end %>
   </div>
   <% end %>
-
-  <%= f.submit "Submit", class: "submit-container submit-button"%>
-  <%end%>
+  <%=f.submit "Submit", class:"submit-button"%>
+  <!-- <%= form_tag league_path method="post" do%>
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <%= submit_tag "Submit" %>
+  <% end %>
+     <input type="submit" value="submit">
+  <%end%> -->
 </div>

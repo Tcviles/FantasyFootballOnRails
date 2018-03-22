@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   resources :leagues do
     resources :teams
   end
-  resources :teams
+  resources :teams, only: [:create, :update]
   resources :positions
 
   root "welcome#home"

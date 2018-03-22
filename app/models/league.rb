@@ -7,12 +7,16 @@ class League < ApplicationRecord
   validates :name, uniqueness: true
 
   def full
-    self.users.size >10
+    self.users.size >=10
   end
 
   def current_winner
     @teams=self.teams.sort_by{|team| team.score}
     self.destroy if @teams.first.nil?
     @teams.first
+  end
+
+  def owner
+    self.teams.order(:id).first.user
   end
 end

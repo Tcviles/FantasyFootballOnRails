@@ -18,16 +18,19 @@ class LeaguesController < ApplicationController
     if @team.save
       redirect_to @league
     else
-      binding.pry
-      flash[:messages] = @league.errors
+      flash[:error] = @league.errors.full_messages + @team.errors.full_messages
       redirect_to new_league_path
     end
   end
 
   def destroy
     @league = League.find(params[:id])
-    @league.destroy
-    redirect_to root_path
+    if @league.owner == current_user
+      @league.destroy
+      redirect_to root_path
+    else
+      redirect_to @league
+    end
   end
 
   private

@@ -20,9 +20,9 @@
           <li><%= link_to "Sign up", new_user_registration_path  %></li>
           <li><%= link_to "Login", new_user_session_path  %></li>
         <% end %>
-          <%= content_tag(:li, flash[:error], :id => "flash_error") if flash[:error] %>
-          <%= content_tag(:li, flash[:notice], :id => "flash_notice") if flash[:notice] %>
-          <%= content_tag(:li, flash[:alert], :id => "flash_alert") if flash[:alert] %>
+        <%= content_tag(:li, flash[:error], :id => "flash_error", :class=>"big_red") if flash[:error] %>
+        <%= content_tag(:li, flash[:notice], :id => "flash_notice") if flash[:notice] %>
+        <%= content_tag(:li, flash[:alert], :id => "flash_alert") if flash[:alert] %>
       </ul>
     </nav><br><br>
     <%= yield %>

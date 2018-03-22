@@ -32,4 +32,8 @@ class Team < ApplicationRecord
     end
     self.mascot = mascot
   end
+
+  def self.best_team
+    Team.all.sort_by{|team| team.score}.first
+  end
 end

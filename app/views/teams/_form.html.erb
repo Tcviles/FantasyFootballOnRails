@@ -8,11 +8,11 @@
 
   <div class="form-field">
     <%= f.fields_for :player_ids do |player_id|%>
-    <% @positions.each do |pos_name, pos| %>
-    <% num= Position.find_by(:name => pos.to_s.upcase).id %>
-    <%= player_id.label pos_name %>
-    <%= player_id.collection_select(pos, Player.all.where(:position_id => num).order(:name), :id, :name, prompt: true)%><br>
-    <% end %>
+      <% @positions.each do |pos_name, pos| %>
+        <% num= Position.find_by(:name => pos.to_s.upcase).id %>
+        <%= player_id.label pos_name %>
+        <%= player_id.collection_select(pos, Player.all.where(:position_id => num).order(:name), :id, :name, prompt: true)%><br>
+      <% end %>
     <% end %>
   </div>
 

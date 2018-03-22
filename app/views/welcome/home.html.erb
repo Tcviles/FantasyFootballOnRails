@@ -1,8 +1,8 @@
 <div class="form-container wider">
-  <h2>
-    Welcome <%=current_user.email%>!
-  </h2><br><br>
-  <%= link_to "Create a new league!", new_league_path, {:class=>"submit-button"} %><br><br>
+  <h2>Welcome <%=current_user.email%>!</h2>
+  <div class="form-field middle kinda_wide">
+    <a href="/leagues/new" class="submit-button">Create a new league!</a><br><br>
+  </div>
   <h2>Here are your Leagues</h2>
   <div class="current_leagues form-field wide clearfix">
     <%@current_leagues.uniq.each do |league|%>
@@ -43,5 +43,7 @@
       </table>
     </div>
     <%end%>
-  </div>
+  </div><br><br>
+
+  <h2><%=@best_team.name%> belonging to <%=@best_team.user.name%> in <%=@best_team.league.name%> is currently the best team with <%=@best_team.score%> points!</h2>
 </div>

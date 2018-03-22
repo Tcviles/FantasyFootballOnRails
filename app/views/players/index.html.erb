@@ -1,5 +1,6 @@
 <div class="form-container wider clearfix">
   <br><%= link_to "Update Players", players_sync_path, {:class => "submit-button"}%><br><br>
+  <%= link_to "new league", new_league_path %>
 
   <%@positions.each do |position|%>
   <div class="shorten player">

@@ -23,8 +23,10 @@
 
 
   <div class="form-field kinda_wide">
-    <%= link_to "Create a roster for league", new_league_team_path(@league), class:"submit-button"%>
-    <%if @league.users.include?(current_user)%>
+    <% if !@league.full %>
+      <%= link_to "Create a roster for league", new_league_team_path(@league), class:"submit-button"%>
+    <% end %>
+    <%if @league.owner == current_user%>
       <%= link_to 'Delete League', @league, method: :delete, data: { confirm: 'Are you sure??' }, class:"submit-button" %>
     <%end%>
   </div>

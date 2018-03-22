@@ -14,7 +14,7 @@ class TeamsController < ApplicationController
       redirect_to @league
     else
       flash[:error] = @team.errors.full_messages
-      redirect_to new_league_team_path(@league, @team)
+      redirect_to new_league_team_path(@league)
     end
   end
 
@@ -28,21 +28,27 @@ class TeamsController < ApplicationController
 
   def update
     @team = Team.find(params[:id])
+    @team.name = team_params[:name]
     @team.player_ids = player_id_values
     @team.mascot_attributes = (team_params[:mascot_attributes])
     @team.user = current_user
     if @team.save
       redirect_to @league
     else
-      render :edit
+      flash[:error] = @team.errors.full_messages
+      redirect_to edit_league_team_path(@league, @team)
     end
   end
 
 
   def destroy
     @team = Team.find(params[:id])
-    @team.destroy
-    redirect_to @league
+    if @team.user == current_user
+      @team.destroy
+      redirect_to @league
+    else
+      redirect_to @league
+    end
   end
 
   private
@@ -54,3 +60,4 @@ class TeamsController < ApplicationController
       @league = League.find(params[:league_id] || params[:team][:league_id])
     end
 end
+  
