@@ -33,8 +33,4 @@ class Player < ApplicationRecord
   def player_rank
     (self.class.all.order(:adp).find_index(self).to_i+1).ordinalize
   end
-
-  def available?(league_id)
-    !self.league_ids.include?(league_id.to_i)
-  end
 end

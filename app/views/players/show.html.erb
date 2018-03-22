@@ -1,23 +1,27 @@
-<br> <%= link_to "Back to Players", players_path, {:class => "button"} %><br><br>
+<div class="form-container wide">
+  <br> <%= link_to "Back to Players", players_path, {:class => "submit-button"} %><br><br>
 
-<table id="player">
-  <thead>
-    <tr>
-      <th><label class= "title"><%=@player.name%></label></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>A <%=@player.position.name%> that plays for <%=@player.nfl_team%>.</td>
-    </tr>
-    <tr>
-      <td>His Average Draft Placement is <%=@player.adp%></td>
-    </tr>
-    <tr>
-      <td>His rank within his positon is <%=@player.position_rank%></td>
-    </tr>
-    <tr>
-      <td>His rank within all players is <%=@player.player_rank%></td>
-    </tr>
-  </tbody>
-</table>
+  <div class="player">
+    <table id="player">
+      <thead>
+        <tr>
+          <th><label class="title"><%=@player.name%></label></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>A <%=@player.position.name%> that plays for <%=@player.nfl_team%>.</td>
+        </tr>
+        <tr>
+          <td>His Average Draft Placement is <%=@player.adp%></td>
+        </tr>
+        <tr>
+          <td>His rank within his positon is <%=@player.position_rank%></td>
+        </tr>
+        <tr>
+          <td>His rank within all players is <%=@player.player_rank%></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,22 +1,13 @@
-<div class="form-container">
-  <h2 class="form-title">New League!</h2>
+
   <div class="form-field">
-    <%= form_for @league do |f| %>
+    <%= form_for @team do |f| %>
+    <%= f.hidden_field :league_id, :value => params[:league_id]%>
     <%= f.label :name %>
-    <%= f.text_field :name, required: true%>
-    <br>
-  </div>
-  <h2 class="form-title">First Team</h2>
-
-  <div class="form-field">
-    <%= f.fields_for @team do |t| %>
-    <%= t.hidden_field :league_id, :value => params[:league_id]%>
-    <%= t.label :name %>
-    <%= t.text_field :name %>
+    <%= f.text_field :name %>
   </div>
 
   <div class="form-field">
-    <%= t.fields_for :player_ids do |player_id|%>
+    <%= f.fields_for :player_ids do |player_id|%>
     <% @positions.each do |pos_name, pos| %>
     <% num= Position.find_by(:name => pos.to_s.upcase).id %>
     <%= player_id.label pos_name %>
@@ -25,9 +16,9 @@
     <% end %>
   </div>
 
-  <h2 class="form-title">Mascot Info</h2>
+  <h2>Mascot Info</h2>
   <div class="form-field">
-    <%= t.fields_for :mascot_attributes do |mascot| %>
+    <%= f.fields_for :mascot_attributes do |mascot| %>
     <%= mascot.collection_select(:id, Mascot.all, :id, :name, prompt:"Select or make a new mascot")%><br><br>
 
     <%= mascot.label :name%>
@@ -40,8 +31,7 @@
     <%= mascot.text_field :motto%><br>
     <% end %>
   </div>
-  <% end %>
 
-  <%= f.submit "Submit", class: "submit-container submit-button"%>
-  <%end%>
+  <%= f.submit "Submit", class: "submit-button"%>
+  <% end %>
 </div>

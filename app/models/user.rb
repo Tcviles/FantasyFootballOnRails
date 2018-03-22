@@ -18,8 +18,4 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0,20]
     end
   end
-
-  def league_team(current_league)
-    self.teams.detect{|team| team.league_id == current_league.id}
-  end
 end

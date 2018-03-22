@@ -1,24 +1,45 @@
-<label class="title"><%= @team.user.email%></label><br>
-<label style="font-size:150%;"><%= @team.name %></label>
+<div class="form-container wide">
+  <h2><%= @team.user.email%></h2><br>
+  <h3 class="form-title"><%= @team.name %></h2>
+  <div class="kinda_wide">
+    <table id="player" class="clearfix">
+      <thead>
+        <th>Name</th>
+        <th>NFL</th>
+        <th>Position</th>
+      </thead>
+      <tbody>
+        <% @team.players.each do |player|%>
+        <tr>
+          <td><%= player.name%></td>
+          <td><%= player.nfl_team%></td>
+          <td><%= player.position.name%></td>
+        </tr>
+        <%end%>
+      </tbody>
+    </table>
+  </div>
 
-<table>
-  <thead>
-    <th>Name</th>
-    <th>NFL</th>
-    <th>Position</th>
-  </thead>
-  <tbody>
-    <% @team.players.each do |player|%>
-    <tr>
-      <td><%= player.name%></td>
-      <td><%= player.nfl_team%></td>
-      <td><%= player.position.name%></td>
-    </tr>
+  <%if !!@team.mascot%>
+  <div class="">
+    <table id= "player" class="clearfix">
+      <thead>
+        <th Style="background-color: <%=@team.mascot.color.downcase%>;"><%=@team.mascot.name%></th>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%=@team.mascot.motto%></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <% end %>
+
+  <div class="clearfix form-field kinda_wide">
+    <%= link_to 'Back', @team.league, class:"submit-button"%>
+    <% if @team.user == current_user %>
+    <%= link_to 'Delete Team', league_team_path(@team.league, @team), method: :delete, data: { confirm: 'Are you sure??' }, class:"submit-button" %>
+    <%= link_to 'Edit Team', edit_league_team_path(params[:league_id],@team), class:"submit-button" %>
     <%end%>
-  </tbody>
-</table>
-<%= link_to 'Back', @team.league %>
-<% if @team.user == current_user %>
-  <%= link_to 'Delete Team', @team, method: :delete, data: { confirm: 'Are you sure??' } %>
-  <%= link_to 'Edit Team', edit_league_team_path(params[:league_id],@team) %>
-<%end%>
+  </div>
+</div>

@@ -1,28 +1,47 @@
-<label class="title"> Welcome <%=current_user.email%>! </label><br><br>
-<table style="float:left;">
-  <thead>
-    <th>Here are your Leagues</th>
-  </thead>
-  <tbody>
+<div class="form-container wider">
+  <h2>
+    Welcome <%=current_user.email%>!
+  </h2><br><br>
+  <%= link_to "Create a new league!", new_league_path, {:class=>"submit-button"} %><br><br>
+  <h2>Here are your Leagues</h2>
+  <div class="current_leagues form-field wide clearfix">
     <%@current_leagues.uniq.each do |league|%>
-      <tr>
-        <td><%= link_to league.name, league_path(league.id)%></td>
-      </tr>
+    <div class="container">
+      <table class="leagues clearfix">
+        <thead>
+          <th><%= link_to league.name, league_path(league.id)%></th>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= league.teams.size %> teams</td>
+          </tr>
+          <tr>
+            <td><%= league.current_winner.name%> is winning.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <%end%>
-  </tbody>
-</table>
+  </div><br><br>
 
-<table style "float:right;">
-  <thead>
-    <th>Leagues you can join!!</th>
-  </thead>
-  <tbody>
+  <h2>Leagues you can join!!</h2>
+  <div class="joinable_leagues form-field wide clearfix">
     <%@available_leagues.each do |league|%>
-      <tr>
-        <td><%= link_to league.name, league_path(league.id)%></td>
-      </tr>
+    <div class="container">
+      <table class="leagues">
+        <thead>
+          <th><%= link_to league.name, league_path(league.id)%></th>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= league.teams.size %> teams</td>
+          </tr>
+          <tr>
+            <td><%= league.current_winner.name%> is winning.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <%end%>
-  </tbody>
-</table>
-
-<%= link_to "Create a new league!", new_league_path, {:class=>"button", :style =>'float:right;'} %>
+  </div>
+</div>

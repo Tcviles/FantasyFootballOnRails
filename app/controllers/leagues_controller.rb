@@ -1,27 +1,27 @@
 class LeaguesController < ApplicationController
+  before_action :set_positions
   def show
     @league = League.find(params[:id])
   end
 
   def new
     @league = League.new
-    @team = @league.teams.build
-    @rb = Player.all.where(:position_id => 1).order(:name)
-    @wr = Player.all.where(:position_id => 2).order(:name)
-    @te = Player.all.where(:position_id => 3).order(:name)
-    @qb = Player.all.where(:position_id => 4).order(:name)
-    @flex = (@rb+@wr+@te).sort_by{|player| player.name}
+    @team = Team.new
   end
 
   def create
-    @league = League.find_or_create_by(:name => league_params[:name])
+    @league = League.create(:name => league_params[:name])
     @team = Team.new(:name => team_params[:name], :player_ids => player_id_values)
     @team.league = @league
     @team.mascot_attributes=(team_params[:mascot_attributes])
     @team.user = current_user
-    binding.pry
-    @team.save
-    redirect_to @league
+    if @team.save
+      redirect_to @league
+    else
+      binding.pry
+      flash[:messages] = @league.errors
+      redirect_to new_league_path
+    end
   end
 
   def destroy
@@ -36,10 +36,6 @@ class LeaguesController < ApplicationController
     end
 
     def team_params
-      league_params.require(:new_team).permit(:name, player_ids:[:qb,:rb,:wr,:flex,:te], mascot_attributes:[:name,:color,:motto])
-    end
-
-    def player_id_values
-      team_params[:player_ids].values
+      league_params.require(:team).permit(:name, player_ids:[@positions.values], mascot_attributes:[:id, :name,:color,:motto])
     end
 end

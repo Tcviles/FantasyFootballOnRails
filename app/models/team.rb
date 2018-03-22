@@ -4,7 +4,7 @@ class Team < ApplicationRecord
   belongs_to :mascot
   has_many :team_players
   has_many :players, through: :team_players
-  validates_presence_of :name, :league_id, :user_id
+  validates_presence_of :name, :league_id, :user_id, :mascot_id
   validate :must_have_5_player_ids
 
   def must_have_5_player_ids
@@ -22,7 +22,14 @@ class Team < ApplicationRecord
   end
 
   def mascot_attributes=(mascot_attributes)
-    mascot = Mascot.find_or_create_by(mascot_attributes)
+    mascot_attributes.delete_if{|k, v| v.empty?}
+    if !!mascot_attributes[:id]
+      mascot = Mascot.find(mascot_attributes[:id])
+    elsif mascot_attributes.empty?
+      mascot = nil
+    else
+      mascot = Mascot.find_or_create_by(mascot_attributes)
+    end
     self.mascot = mascot
   end
 end

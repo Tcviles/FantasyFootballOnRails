@@ -1,10 +1,11 @@
-<br><%= link_to "Update Players", players_sync_path, {:class => "button"}%><br><br>
+<div class="form-container wider clearfix">
+  <br><%= link_to "Update Players", players_sync_path, {:class => "submit-button"}%><br><br>
 
-<%@positions.each do |position|%>
+  <%@positions.each do |position|%>
   <div class="shorten player">
     <table id="player">
       <thead>
-          <caption><label class="title"><%=position.name%></label></caption>
+        <caption><label class="title"><%=position.name%></label></caption>
         <tr>
           <th>Ranking</th>
           <th>Name</th>
@@ -16,20 +17,21 @@
       </thead>
       <tbody>
         <% position.players.order(:adp).each_with_index do |player, index| %>
-          <tr>
-            <% if index<=9%>
-              <td style="text-align:center; color:white; background-color:green;"><%=index+1%></td>
-            <%else%>
-              <td style="text-align:center;"><%=index+1%></td>
-            <%end%>
-            <td><%=player.name%></td>
-            <td><%=player.position.name%></td>
-            <td><%=player.nfl_team%></td>
-            <td><%=player.adp%></td>
-            <td><%=link_to "See Me", player_path(player)%></td>
-          </tr>
+        <tr>
+          <% if index<=9%>
+          <td style="text-align:center; color:white; background-color:green;"><%=index+1%></td>
+          <%else%>
+          <td style="text-align:center;"><%=index+1%></td>
+          <%end%>
+          <td><%=player.name%></td>
+          <td><%=player.position.name%></td>
+          <td><%=player.nfl_team%></td>
+          <td><%=player.adp%></td>
+          <td><%=link_to "See Me", player_path(player)%></td>
+        </tr>
         <% end %>
       </tbody>
     </table>
   </div>
-<%end%>
+  <%end%>
+</div>

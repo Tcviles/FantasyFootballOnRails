@@ -12,6 +12,7 @@ class League < ApplicationRecord
 
   def current_winner
     @teams=self.teams.sort_by{|team| team.score}
+    self.destroy if @teams.first.nil?
     @teams.first
   end
 end
