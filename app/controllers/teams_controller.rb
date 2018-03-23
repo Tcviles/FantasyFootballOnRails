@@ -45,7 +45,12 @@ class TeamsController < ApplicationController
     @team = Team.find(params[:id])
     if @team.user == current_user
       @team.destroy
-      redirect_to @league
+      if @league.teams.size == 0
+        @league.destroy
+        redirect_to root_path
+      else
+        redirect_to @league
+      end
     else
       redirect_to @league
     end
@@ -60,4 +65,3 @@ class TeamsController < ApplicationController
       @league = League.find(params[:league_id] || params[:team][:league_id])
     end
 end
-  
