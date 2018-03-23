@@ -9,7 +9,7 @@ class Team < ApplicationRecord
 
   def must_have_5_player_ids
     if self.player_ids.uniq.size != 5
-      errors.add(:player_ids, "must_have_5_unique_player_ids")
+      errors.add(:player_ids, "Must pick 5 players!")
     end
   end
 
