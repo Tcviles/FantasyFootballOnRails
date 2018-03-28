@@ -35,3 +35,10 @@ Player
 Position
   -has many players
   -name
+
+
+
+  Players ratings
+  1 create a migration add ratings attr
+  2 create method to assign ratings based on score
+  3 make the ratings viewable.

@@ -4,12 +4,21 @@ class Team < ApplicationRecord
   belongs_to :mascot
   has_many :team_players
   has_many :players, through: :team_players
-  validates_presence_of :name, :league_id, :user_id, :mascot_id
+  validates_presence_of :name, :league_id, :user_id
   validate :must_have_5_player_ids
 
   def must_have_5_player_ids
     if self.player_ids.uniq.size != 5
       errors.add(:player_ids, "Must pick 5 players!")
+    end
+  end
+
+  def self.make_ratings
+    self.all.each do |team|
+      s = team.score
+      n = (7-(s/100)).round(2)
+      team.ratings = "#{n} stars!"
+      team.save
     end
   end
 
